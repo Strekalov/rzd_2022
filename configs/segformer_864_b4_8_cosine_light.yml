@@ -1,0 +1,28 @@
+exp_name: segformer_864_b4_8_cosine_light
+outdir: ./experiments/
+dataset:
+  root_dir: /home/artem/datasets/rzd_dataset
+  val_size: 0.1
+  test_dir: /home/artem/datasets/rzd_public
+  with_augs: false
+  input_size: 864
+  batch_size: 2
+  num_workers: 16
+  part: light
+  augmentation: null
+seed: 42
+model:
+  pretrain_name: nvidia/segformer-b4-finetuned-cityscapes-1024-1024
+train:
+  optimizer: AdamW
+  grad_accum_steps: 8
+  learning_rate: 0.00012479959108550854
+  min_learning_rate: 5.0e-05
+  momentum: 0.9
+  weight_decay: 0.09947372426357316
+  lr_schedule:
+    name: cosine
+    step_size: 3
+    gamma: 0.632
+    last_epoch: 6
+  n_epoch: 40

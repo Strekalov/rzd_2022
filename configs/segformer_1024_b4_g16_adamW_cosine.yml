@@ -1,0 +1,25 @@
+exp_name: segformer_1024_b4_g16_adamW_cosine
+outdir: ./experiments/
+dataset:
+  root_dir: /home/artem/datasets/rzd_dataset
+  val_size: 0.005
+  test_dir: /home/artem/datasets/rzd_public
+  with_augs: false
+  input_size: 1024
+  batch_size: 2
+  num_workers: 16
+  part: full
+seed: 42
+model:
+  pretrain_name: nvidia/segformer-b4-finetuned-cityscapes-1024-1024
+train:
+  optimizer: AdamW
+  grad_accum_steps: 16
+  learning_rate: 0.0003
+  momentum: 0.9
+  weight_decay: 0.2
+  lr_schedule:
+    name: cosine
+    step_size: 2
+    gamma: 0.2
+  n_epoch: 12
