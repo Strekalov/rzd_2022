@@ -13,8 +13,8 @@ from schemas import Config
 from train import train, validation
 from utils import AverageMeter
 
+miou_stat = AverageMeter("MIOU")
 
-miou_stat = AverageMeter('MIOU')
 
 def run_train(config: Config):
 
@@ -54,14 +54,16 @@ def run_train(config: Config):
             optimizer=optimizer,
             scheduler=scheduler,
             epoch=epoch,
-            miou_stat=miou_stat
+            miou_stat=miou_stat,
         )
         # val_miou = validation(model=model, dataloader=val_dataloader, device=device)
         scheduler.step()
         print(f"Train MIOU on {epoch} epoch: {miou_stat.avg}")
         train_miou = miou_stat.avg
         miou_stat.reset()
-        val_miou = validation(model=model, dataloader=val_dataloader, device=device, miou_stat=miou_stat)
+        val_miou = validation(
+            model=model, dataloader=val_dataloader, device=device, miou_stat=miou_stat
+        )
         print(f"Val MIOU on {epoch} epoch: {miou_stat.avg}")
         utils.save_checkpoint(
             config=config,
@@ -73,7 +75,7 @@ def run_train(config: Config):
             val_miou=val_miou,
         )
         miou_stat.reset()
-    
+
 
 def main(
     cfg: Path = typer.Option("configs/baseline.yml", help="Путь до конфига"),
