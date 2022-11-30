@@ -1,5 +1,5 @@
 
-<h1 align="center">Решение N-го места для соревнования <a href="https://hacks-ai.ru/championships/758453">Всероссийский чемпионат, кейс РЖД</a> 
+<h1 align="center">Решение 2-го места для соревнования <a href="https://hacks-ai.ru/championships/758453">Всероссийский чемпионат, кейс РЖД</a> 
 
 ## Для воспроизведения результатов выполните следующие действия:
 
@@ -34,7 +34,7 @@ python generate_predictions.py --cfg experiments/segformer_1024_b4_g16_adamW_cos
 python generate_predictions.py --cfg experiments/segformer_1024_b4_g16_adamW_cosine/segformer_1024_b4_g16_adamW_cosine.yml  --checkpoint-path <Путь до чекпоинта с наивысшим miou> --scale 0.635
 ```
 
-
+#### Обьъедените папки predictions/segformer_864_b4_8_cosine_dark и predictions/segformer_864_b4_8_cosine_light
 #### Запускаем скрипт, который усреднит все предикты и сгенерирует итоговую маску
 ```
 python create_submission_ensemble.py
